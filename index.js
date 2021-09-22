@@ -34,8 +34,12 @@ const main = async () => {
 
     const reviews = masterReviews.data.filter((review => review.state === "APPROVED"));
 
-    if (reviews.length < numberOfReviews) {
+    if (reviews.length === 0) {
       throw new Error("É necessário solicitar os reviews no PR #"+ masterPr.number +" ("+ masterPr.html_url +")");
+    }
+
+    if (reviews.length < numberOfReviews) {
+      throw new Error("É necessário solicitar +"+ (numberOfReviews - reviews.length) +" os reviews no PR #"+ masterPr.number +" ("+ masterPr.html_url +")");
     }
   }
 
