@@ -12,6 +12,9 @@ const main = async () => {
   const sourceBranch = stagePull.head.ref;
   const targetBranch = stagePull.base.ref;
 
+  console.log(sourceBranch);
+  console.log(targetBranch);
+
   if (targetBranch !== repo.default_branch) {
     const pulls = await octokit.rest.pulls.list({
       owner: repo.owner.login,
