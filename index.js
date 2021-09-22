@@ -12,9 +12,6 @@ const main = async () => {
   const sourceBranch = stagePull.head.ref;
   const targetBranch = stagePull.base.ref;
 
-  console.log(sourceBranch);
-  console.log(targetBranch);
-
   if (targetBranch !== repo.default_branch) {
     const pulls = await octokit.rest.pulls.list({
       owner: repo.owner.login,
@@ -30,7 +27,7 @@ const main = async () => {
 
     const masterPr = pulls.data[0];
     const masterReviews = await octokit.rest.pulls.listReviews({
-      owner: repo.owner.name,
+      owner: repo.owner.login,
       repo: repo.name,
       pull_number: masterPr.number,
     });
