@@ -6,7 +6,11 @@ const main = async () => {
   const numberOfReviews = core.getInput("requiredReviews");
 
   const octokit = github.getOctokit(githubToken);
-  const stagePull = github.context.payload.pull_request;
+  const stagePull = await octokit.rest.pulls.get({
+    pull_number: 2,
+    owner: "Rentcars",
+    repo: "teste-rentcars",
+  });
   const repo = stagePull.repo;
 
   const sourceBranch = stagePull.head.ref;
