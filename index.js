@@ -49,9 +49,6 @@ const main = async () => {
 }
 
 main()
-  .then(() => {
-    core.info(`Sucesso 🎉`);
-  })
   .catch(error => {
     core.error(error);
     core.setFailed(error.message);
