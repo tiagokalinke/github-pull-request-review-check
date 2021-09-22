@@ -6,29 +6,22 @@ const main = async () => {
   const numberOfReviews = core.getInput("requiredReviews");
 
   const octokit = github.getOctokit(githubToken);
-  const stagePull = await octokit.rest.pulls.get({
-    pull_number: 2,
-    owner: "Rentcars",
-    repo: "teste-rentcars",
-  });
-
-  console.log(JSON.stringify(stagePull.data));
-
-  const repo = stagePull.repo;
+  const stagePull = github.context.payload.pull_request;
+  const repo = stagePull.head.repo;
 
   const sourceBranch = stagePull.head.ref;
   const targetBranch = stagePull.base.ref;
 
   if (targetBranch !== repo.data.default_branch) {
     const pulls = await octokit.rest.pulls.list({
-      owner: repo.owner.name,
+      owner: repo.owner.login,
       repo: repo.name,
       head: stagePull.data.head.ref,
       base: repo.data.default_branch,
     });
 
     if (pulls.length === 0) {
-      const createPrUrl = `https://github.com/${repo.owner.name}/${repo.name}/compare/${repo.data.default_branch}...${sourceBranch}`;
+      const createPrUrl = `https://github.com/${repo.owner.login}/${repo.name}/compare/${repo.data.default_branch}...${sourceBranch}`;
       throw new Error("É necessário criar o PR para o branch "+ repo.data.default_branch +". Acesse: "+ createPrUrl);
     }
 
@@ -42,7 +35,7 @@ const main = async () => {
     const reviews = masterReviews.data.filter((review => review.state === "APPROVED"));
 
     if (reviews.length < numberOfReviews) {
-      throw new Error("É necessário solicitar os reviews no PR #"+ masterPr.number +" ("+ masterPr.url +")");
+      throw new Error("É necessário solicitar os reviews no PR #"+ masterPr.number +" ("+ masterPr.html_url +")");
     }
   }
 
