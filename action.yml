@@ -11,5 +11,5 @@ inputs:
     description: Number of required reviews
     required: true
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: docker
+  image: docker://node:16
