@@ -21,7 +21,7 @@ const main = async () => {
       state: "open",
     });
 
-    if (pulls.length === 0) {
+    if (pulls.data.length === 0) {
       const createPrUrl = `https://github.com/${repo.owner.login}/${repo.name}/compare/${repo.default_branch}...${sourceBranch}`;
       throw new Error("É necessário criar o PR para o branch "+ repo.default_branch +". Acesse: "+ createPrUrl);
     }
