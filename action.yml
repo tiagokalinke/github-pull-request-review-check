@@ -11,5 +11,5 @@ inputs:
     description: Number of required reviews
     required: true
 runs:
-  using: docker
-  image: docker://node:16
+  using: 'docker'
+  image: 'Dockerfile'
