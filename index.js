@@ -12,17 +12,17 @@ const main = async () => {
   const sourceBranch = stagePull.head.ref;
   const targetBranch = stagePull.base.ref;
 
-  if (targetBranch !== repo.data.default_branch) {
+  if (targetBranch !== repo.default_branch) {
     const pulls = await octokit.rest.pulls.list({
       owner: repo.owner.login,
       repo: repo.name,
-      head: stagePull.data.head.ref,
-      base: repo.data.default_branch,
+      head: stagePull.head.ref,
+      base: repo.default_branch,
     });
 
     if (pulls.length === 0) {
-      const createPrUrl = `https://github.com/${repo.owner.login}/${repo.name}/compare/${repo.data.default_branch}...${sourceBranch}`;
-      throw new Error("É necessário criar o PR para o branch "+ repo.data.default_branch +". Acesse: "+ createPrUrl);
+      const createPrUrl = `https://github.com/${repo.owner.login}/${repo.name}/compare/${repo.default_branch}...${sourceBranch}`;
+      throw new Error("É necessário criar o PR para o branch "+ repo.default_branch +". Acesse: "+ createPrUrl);
     }
 
     const masterPr = pulls.data[0];
