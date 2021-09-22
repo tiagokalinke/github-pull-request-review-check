@@ -1,5 +1,5 @@
-name: 'Check review of default branch PR'
-description: 'GitHub action to check review of default branch PR'
+name: 'Checks review of Pull Request to default branch'
+description: 'GitHub action to checks review of Pull Request to default branch'
 branding:
   color: 'blue'
   icon: 'tag'
