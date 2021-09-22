@@ -39,7 +39,8 @@ const main = async () => {
     }
 
     if (reviews.length < numberOfReviews) {
-      throw new Error("É necessário solicitar +"+ (numberOfReviews - reviews.length) +" os reviews no PR #"+ masterPr.number +" ("+ masterPr.html_url +")");
+      const diff = (numberOfReviews - reviews.length);
+      throw new Error("É necessário solicitar +"+ diff +" "+ (diff > 1 ? "reviews" : "review") +" no PR #"+ masterPr.number +" ("+ masterPr.html_url +")");
     }
   }
 
