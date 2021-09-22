@@ -5,7 +5,6 @@ const main = async () => {
   console.log("Oi");
 
   const githubToken = core.getInput("token");
-  const githubBranch = core.getInput("branch");
   const numberOfReviews = core.getInput("requiredReviews");
 
   const octokit = github.getOctokit(githubToken);
@@ -15,7 +14,7 @@ const main = async () => {
   const sourceBranch = stagePull.head.ref;
   const targetBranch = stagePull.base.ref;
 
-  if (targetBranch === githubBranch) {
+  if (targetBranch !== repo.data.default_branch) {
     const pulls = await octokit.rest.pulls.list({
       owner: repo.owner.name,
       repo: repo.name,

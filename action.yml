@@ -1,0 +1,15 @@
+name: 'Check review of default branch PR'
+description: 'GitHub action to check review of default branch PR'
+branding:
+  color: 'blue'
+  icon: 'tag'
+inputs:
+  token:
+    description: Auth token for user
+    required: true
+  requiredReviews:
+    description: Number of required reviews
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
