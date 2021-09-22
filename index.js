@@ -18,6 +18,7 @@ const main = async () => {
       repo: repo.name,
       head: stagePull.head.ref,
       base: repo.default_branch,
+      state: "open",
     });
 
     if (pulls.length === 0) {
