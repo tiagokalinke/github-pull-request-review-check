@@ -11,6 +11,9 @@ const main = async () => {
     owner: "Rentcars",
     repo: "teste-rentcars",
   });
+
+  console.log(JSON.stringify(stagePull.data));
+
   const repo = stagePull.repo;
 
   const sourceBranch = stagePull.head.ref;
