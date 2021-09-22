@@ -2,8 +2,6 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 const main = async () => {
-  console.log("Oi");
-
   const githubToken = core.getInput("token");
   const numberOfReviews = core.getInput("requiredReviews");
 
